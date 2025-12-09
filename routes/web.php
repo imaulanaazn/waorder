@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Livewire\Volt\Volt;
 
 Volt::route('/', 'pages.home')->name('home');
@@ -19,5 +21,13 @@ Route::group(['middleware' => 'auth'], function () {
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('/logout', function () {
+    Auth::guard('web')->logout();
+
+    Session::invalidate();
+    Session::regenerateToken();
+    return redirect('/login');
+})->name('logout');
 
 require __DIR__ . '/auth.php';

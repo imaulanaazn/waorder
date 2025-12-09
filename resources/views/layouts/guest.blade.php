@@ -8,33 +8,43 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    @livewireStyles
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/97e48f7299.js" crossorigin="anonymous"></script> <!-- Nucleo Icons -->
+    <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <!-- Popper -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- Main Styling -->
+    @vite(['public/assets/css/argon-dashboard-tailwind.css?v=1.0.1'])
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="antialiased bg-body text-body font-body">
-    <div class="absolute top-0 left-0 w-full bg-transparent z-50">
+    <div class="absolute top-4 left-0 w-full bg-transparent z-50!">
         <section x-data="{ mobileNavOpen: false }">
             <nav class="py-6">
-                <div class="container mx-auto px-4">
-                    <div class="relative flex items-center justify-between"><a class="inline-block" href="#"><img class="h-8" src="images/logo-white.svg" alt="" /></a>
-                        <ul class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex">
-                            <li class="mr-8"><a class="inline-block text-white hover:text-lime-500 font-medium" href="about.html">About us</a></li>
-                            <li class="mr-8"><a class="inline-block text-white hover:text-lime-500 font-medium" href="pricing.html">Pricing</a></li>
-                            <li class="mr-8"><a class="inline-block text-white hover:text-lime-500 font-medium" href="contact.html">Contact us</a></li>
-                            <li><a class="inline-block text-white hover:text-lime-500 font-medium" href="blog.html">Blog</a></li>
-                        </ul>
+                <div class="container mx-auto px-8! md:px-10! lg:px-4">
+                    <div class="relative flex items-center justify-between">
+                        <a class="inline-block" href="#">
+                            <!-- <img class="h-8" src="images/logo-white.svg" alt="" /> -->
+                            <p class="text-white mb-0">WAOrder</p>
+                        </a>
                         <div class="flex items-center justify-end">
-                            <div class="hidden md:block"><a class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-white hover:text-teal-900 border border-white hover:bg-white rounded-full transition duration-200" href="/login"><span class="mr-2">Log In</span> <span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
+                            <div class="hidden md:block!">
+                                <a class="inline-flex group py-2.5 px-4 items-center justify-center text-sm font-medium text-white hover:text-teal-900 border border-white hover:bg-white/40 rounded-full transition duration-200" href="/login">
+                                    <span class="mr-2">Keranjang</span>
+                                    <span class="transform group-hover:translate-x-0.5 transition-transform duration-200">
                                         <svg width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.75 10H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M10 4.75L15.25 10L10 15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg></span></a></div>
-                            <button class="md:hidden text-white hover:text-lime-500" x-on:click="mobileNavOpen = !mobileNavOpen">
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                            <button class="md:hidden! text-white hover:text-lime-500" x-on:click="mobileNavOpen = !mobileNavOpen">
                                 <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.19995 23.2H26.7999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     <path d="M5.19995 16H26.7999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -49,7 +59,10 @@
             <div class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50" :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}">
                 <div class="fixed inset-0 bg-violet-900 opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
                 <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
-                    <div class="flex items-center justify-between"><a class="inline-block" href="#"><img class="h-8" src="fauna-assets/logos/sign-logo-flow.svg" alt="" /></a>
+                    <div class="flex items-center justify-between"><a class="inline-block" href="#">
+                            <!-- <img class="h-8" src="fauna-assets/logos/sign-logo-flow.svg" alt="" /> -->
+                            <p class="mb-0">WAOrder</p>
+                        </a>
                         <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="#">Login</a>
                             <button x-on:click="mobileNavOpen = !mobileNavOpen">
                                 <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,15 +71,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="pt-20 pb-12 mb-auto">
-                        <ul class="flex-col">
-                            <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="about.html">About us</a></li>
-                            <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="pricing.html">Pricing</a></li>
-                            <li class="mb-6"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="contact.html">Contact us</a></li>
-                            <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium" href="blog.html">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="flex items-center justify-between"><a class="inline-flex items-center text-lg font-medium text-teal-900" href="#"><span>
+                    <div class="flex items-center justify-between mt-4"><a class="inline-flex items-center text-lg font-medium text-teal-900" href="#"><span>
                                 <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.4 6.39999H25.6C26.92 6.39999 28 7.47999 28 8.79999V23.2C28 24.52 26.92 25.6 25.6 25.6H6.4C5.08 25.6 4 24.52 4 23.2V8.79999C4 7.47999 5.08 6.39999 6.4 6.39999Z" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     <path d="M28 8.8L16 17.2L4 8.8" stroke="#646A69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -89,6 +94,14 @@
         </section>
     </div>
     {{ $slot }}
+
+    @livewireScripts
+
+    <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}" defer></script>
+
+    @stack('scripts')
 </body>
 
 </html>

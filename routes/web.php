@@ -30,4 +30,8 @@ Route::get('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
+Route::get('/user/settings', function () {
+    return view('user.settings');
+})->name('user.settings');
+
 require __DIR__ . '/auth.php';

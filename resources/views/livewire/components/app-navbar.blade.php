@@ -1,7 +1,7 @@
- <div class="absolute top-0 md:top-3 left-0 w-full z-50!">
+ <div class="absolute top-0 left-0 w-full z-50!">
      <section x-data="{ mobileNavOpen: false }">
-         <nav class="py-6">
-             <div class="container mx-auto px-8! md:px-10! lg:px-4">
+         <nav class="py-5 md:py-6 lg:py-9 bg-teal-900">
+             <div class="container mx-auto px-6! md:px-12! lg:px-4">
                  <div class="relative flex items-center justify-between">
                      <a class="hidden md:inline-block" href="/">
                          <p class="text-white mb-0 text-xl font-bold text-lime-300!">TOKOPAEDI</p>

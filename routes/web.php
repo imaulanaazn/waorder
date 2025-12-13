@@ -18,6 +18,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Volt::route('/create-store', 'pages.store.create-store')->name('create-store');
+    Volt::route('/store', 'pages.store.index')->name('store-index');
+});
+
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
@@ -33,5 +38,7 @@ Route::get('/logout', function () {
 Route::get('/user/settings', function () {
     return view('user.settings');
 })->name('user.settings');
+
+
 
 require __DIR__ . '/auth.php';

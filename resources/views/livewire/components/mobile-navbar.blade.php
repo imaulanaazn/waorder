@@ -1,5 +1,5 @@
 <!-- Barre de navigation mobile avec morphisme -->
-<div class="lg:hidden fixed bottom-0 left-0 transform z-50 w-full">
+<div class="lg:hidden fixed bottom-0 left-0 transform z-40 w-full">
     <div class="px-0 md:px-28 flex justify-between items-center p-3 px-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-t-3xl shadow-lg border border-white/20 dark:border-gray-700/50">
 
         <!-- Accueil -->

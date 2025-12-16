@@ -405,4 +405,5 @@
             </div>
         </div>
     </div>
+    <livewire:components.mobile-navbar path="/store" />
 </div>

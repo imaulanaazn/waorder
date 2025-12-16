@@ -389,4 +389,5 @@
             </div>
         </div>
     </section>
+    <livewire:components.mobile-navbar path="/" />
 </div>

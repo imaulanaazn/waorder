@@ -1,14 +1,607 @@
 <div>
-    <section class="relative bg-teal-900 pt-12">
-        <img class="absolute top-0 left-0 w-full h-full" src="fauna-assets/headers/bg-waves.png" alt="" />
-        <div class="bg-teal-900">
-            <div class="relative pt-18 pb-24 sm:pb-32 lg:pt-36 lg:pb-62">
-                <div class="container mx-auto px-4 relative">
-                    <div class="max-w-lg xl:max-w-xl mx-auto text-center">
-                        <h1 class="font-heading text-5xl xs:text-7xl xl:text-8xl tracking-tight text-white mb-8">Energizing a Green Future</h1>
-                        <p class="max-w-md xl:max-w-none text-lg text-white opacity-80 mb-10">Our commitment to green energy is paving the way for a cleaner, healthier planet. Join us on a journey towards a future where clean, renewable energy sources transform the way we power our lives.</p><a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-teal-900 border border-lime-500 hover:border-white bg-lime-500 hover:bg-white rounded-full transition duration-200" href="#">See our solutions</a>
+    <section class="mt-22 md:mt-26 lg:mt-38 lg:pb-0">
+        <div class="container mx-auto px-4">
+            <div x-data="{            
+                    slides: [                
+                        {
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-1.webp',
+                            imgAlt: 'Vibrant abstract painting with swirling blue and light pink hues on a canvas.',                
+                        },                
+                        {                    
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-2.webp',                    
+                            imgAlt: 'Vibrant abstract painting with swirling red, yellow, and pink hues on a canvas.',                
+                        },                
+                        {                    
+                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-3.webp',                    
+                            imgAlt: 'Vibrant abstract painting with swirling blue and purple hues on a canvas.',                
+                        },            
+                    ],            
+                    currentSlideIndex: 1,
+                    previous() {                
+                        if (this.currentSlideIndex > 1) {                    
+                            this.currentSlideIndex = this.currentSlideIndex - 1                
+                        } else {   
+                            // If it's the first slide, go to the last slide           
+                            this.currentSlideIndex = this.slides.length                
+                        }            
+                    },            
+                    next() {                
+                        if (this.currentSlideIndex < this.slides.length) {                    
+                            this.currentSlideIndex = this.currentSlideIndex + 1                
+                        } else {                 
+                            // If it's the last slide, go to the first slide    
+                            this.currentSlideIndex = 1                
+                        }            
+                    },        
+                }" class="relative w-full overflow-hidden rounded-xl">
+
+                <!-- previous button -->
+                <button type="button" class="absolute left-5 top-1/2 z-20 flex rounded-full -translate-y-1/2! items-center justify-center bg-white/40 p-2 text-gray-600 transition hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="previous slide" x-on:click="previous()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pr-0.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+
+                <!-- next button -->
+                <button type="button" class="absolute right-5 top-1/2 z-20 flex rounded-full -translate-y-1/2! items-center justify-center bg-white/40 p-2 text-gray-600 transition hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="next slide" x-on:click="next()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pl-0.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+
+                <!-- slides -->
+                <!-- Change min-h-[50svh] to your preferred height size -->
+                <div class="relative min-h-[20svh] lg:min-h-[40svh] w-full">
+                    <template x-for="(slide, index) in slides">
+                        <div x-show="currentSlideIndex == index + 1" class="absolute inset-0" x-transition.opacity.duration.1000ms>
+                            <img class="absolute w-full h-full inset-0 object-cover text-on-surface dark:text-on-surface-dark" x-bind:src="slide.imgSrc" x-bind:alt="slide.imgAlt" />
+                        </div>
+                    </template>
+                </div>
+
+                <!-- indicators -->
+                <div class="absolute rounded-radius bottom-3 md:bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-4 md:gap-3 bg-surface/75 px-1.5 py-1 md:px-2 dark:bg-surface-dark/75" role="group" aria-label="slides">
+                    <template x-for="(slide, index) in slides">
+                        <button class="size-2 rounded-full transition bg-on-surface dark:bg-on-surface-dark" x-on:click="currentSlideIndex = index + 1" x-bind:class="[currentSlideIndex === index + 1 ? 'bg-on-surface dark:bg-on-surface-dark' : 'bg-on-surface/50 dark:bg-on-surface-dark/50']" x-bind:aria-label="'slide ' + (index + 1)"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-4 lg:pt-10">
+        <div class="container mx-auto px-4">
+            <div class="wrapper rounded-xl border border-gray-200 p-6">
+                <h2 class="text-xl font-bold text-gray-800">Kategori Pilihan</h2>
+                <div class="kategori flex items-center gap-3 mt-4 w-full overflow-scroll no-scrollbar">
+                    @foreach(['Makanan', 'Minuman', 'Tas', 'Sepeda', 'Kapal', 'Motor', 'Laptop', 'Handphone', 'Elektronik', 'Buku', 'Fashion'] as $category)
+                    <div class="bg-white rounded-full px-4 py-1.5 text-center border border-gray-300 flex items-center justify-center gap-1.5 hover:bg-gray-200 transition hover:cursor-pointer">
+                        <i class="fa-solid fa-archway text-sm text-gray-500"></i>
+                        <span class="text-base text-gray-600">{{ $category }}</span>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-4 lg:pt-10">
+        <div class="container mx-auto px-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Produk Terlaris</h2>
+            <div class="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jakarta Pusat</span>
+                        </div>
                     </div>
                 </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 max-w-34 mx-auto text-center">
+                <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
+            </div>
+        </div>
+        <div class="container mx-auto px-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-4 mt-6">Rekomendasi Untukmu</h2>
+            <div class="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jakarta Pusat</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                    <!-- Product Image Section -->
+                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Section -->
+                    <div class="pt-4">
+                        <!-- Title -->
+                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+
+
+                        <!-- Price and CTA -->
+                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                            <div class="price-container">
+                                <div class="flex items-center">
+                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
+                                        Rp <span>279.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="flex items-center">
+                            <div class="flex text-amber-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-1">5.0</span>
+                            <span class="text-gray-500 text-sm ml-1">.</span>
+                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
+                        </div>
+                        <div class="alamat">
+                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 max-w-34 mx-auto text-center">
+                <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
             </div>
         </div>
     </section>
@@ -17,22 +610,22 @@
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-10 md:mb-0">
                     <div class="text-center">
-                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">5,000 Mwh</h5><span class="text-base lg:text-lg text-gray-700">Renewable Energy Generated</span>
+                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">5,00+</h5><span class="text-base lg:text-lg text-gray-700">Barang</span>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-10 md:mb-0">
                     <div class="text-center">
-                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">2,500+</h5><span class="text-base lg:text-lg text-gray-700">Renewable Energy Generated</span>
+                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">2,500+</h5><span class="text-base lg:text-lg text-gray-700">Penjualan</span>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-10 sm:mb-0">
                     <div class="text-center">
-                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">10,000+</h5><span class="text-base lg:text-lg text-gray-700">Renewable Energy Generated</span>
+                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">10,000+</h5><span class="text-base lg:text-lg text-gray-700">Pengguna</span>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 md:w-1/4 px-4">
                     <div class="text-center">
-                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">15%</h5><span class="text-base lg:text-lg text-gray-700">Renewable Energy Generated</span>
+                        <h5 class="text-2xl xs:text-3xl lg:text-4xl xl:text-5xl mb-4">10+</h5><span class="text-base lg:text-lg text-gray-700">Metode pembayaran</span>
                     </div>
                 </div>
             </div>
@@ -44,10 +637,10 @@
                 <div class="flex mb-4 items-center">
                     <svg width="8" height="8" viewbox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="4" cy="4" r="4" fill="#022C22"></circle>
-                    </svg><span class="inline-block ml-2 text-sm font-medium">Solutions</span>
+                    </svg><span class="inline-block ml-2 text-sm font-medium">Solusi Belanja-mu</span>
                 </div>
                 <div class="border-t border-teal-900 border-opacity-25 pt-14">
-                    <h1 class="font-heading text-4xl sm:text-6xl mb-24">Key to clean future</h1>
+                    <h1 class="font-heading text-4xl sm:text-6xl mb-24">Belanja gampang dan terpercaya</h1>
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full sm:w-1/2 px-4 mb-16">
                             <div>
@@ -58,8 +651,8 @@
                                     <circle cx="32" cy="16" r="4" fill="#022C22"></circle>
                                 </svg>
                                 <div class="mt-6">
-                                    <h5 class="text-2xl font-medium mb-3">EV charging </h5>
-                                    <p class="mb-6">EVs use electricity as a power source, which can be generated from renewable energy sources. Our solutions help reducing greenhouse gas emissions in the transportation sector.</p><a class="inline-block text-lg  font-medium hover:text-teal-700" href="#">Read more</a>
+                                    <h5 class="text-2xl font-medium mb-3">Pengiriman Cepat </h5>
+                                    <p class="mb-6">Kami bekerja sama dengan kurir terpercaya untuk memberikan pengiriman cepat dan aman tanpa perlu repot.</p>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +670,8 @@
                                     <rect x="11.9792" y="13.3934" width="2" height="12" rx="1" transform="rotate(-45 11.9792 13.3934)" fill="#022C22"></rect>
                                 </svg>
                                 <div class="mt-6">
-                                    <h5 class="text-2xl font-medium mb-3">Solar Energy</h5>
-                                    <p class="mb-6">Solar panels convert sunlight into electricity. Photovoltaic (PV) cells on these panels capture the energy from the sun and convert it into electrical power.</p><a class="inline-block text-lg  font-medium hover:text-teal-700" href="#">Read more</a>
+                                    <h5 class="text-2xl font-medium mb-3">Barang berkualitas dan lengkap</h5>
+                                    <p class="mb-6">Kami memberikan barang yang berkualitas dan lengkap sesuai dengan yang anda pesan. Semua yang anda butuhkan dapat anda temukan disini</p>
                                 </div>
                             </div>
                         </div>
@@ -96,8 +689,8 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M24 17C20.134 17 17 20.134 17 24C17 24.5523 16.5523 25 16 25C15.4477 25 15 24.5523 15 24C15 19.0294 19.0294 15 24 15C24.5523 15 25 15.4477 25 16C25 16.5523 24.5523 17 24 17Z" fill="#022C22"></path>
                                 </svg>
                                 <div class="mt-6">
-                                    <h5 class="text-2xl font-medium mb-3">Wind Energy</h5>
-                                    <p class="mb-6">Wind turbines harness the kinetic energy of the wind to generate electricity. Wind farms with multiple turbines are commonly used to produce large amounts of clean energy.</p><a class="inline-block text-lg  font-medium hover:text-teal-700" href="#">Read more</a>
+                                    <h5 class="text-2xl font-medium mb-3">Gampang dan Aman</h5>
+                                    <p class="mb-6">Cari barang apa aja, checkout dan bayar dengan mudah. Gak perlu capek capek gak perlu pusing, kami jamin barang anda sampai ke tangan anda dengan selamat</p>
                                 </div>
                             </div>
                         </div>
@@ -108,8 +701,8 @@
                                     <path d="M23.8425 12.3779C23.9008 12.238 24.0992 12.238 24.1575 12.3779L30.1538 26.7692C31.9835 31.1605 28.7572 36 24 36Lnan nanL24 36C19.2428 36 16.0165 31.1605 17.8462 26.7692L23.8425 12.3779Z" fill="#022C22"></path>
                                 </svg>
                                 <div class="mt-6">
-                                    <h5 class="text-2xl font-medium mb-3">Hydropower</h5>
-                                    <p class="mb-6">This technology uses the energy from flowing water, such as rivers and dams, to turn turbines and generate electricity. It's one of the oldest forms of renewable energy.</p><a class="inline-block text-lg  font-medium hover:text-teal-700" href="#">Read more</a>
+                                    <h5 class="text-2xl font-medium mb-3">Bisa Return</h5>
+                                    <p class="mb-6">Jika barang rusak atau tidak sesuai dengan yang anda pesan, anda dapat mengembalikan barang tersebut dengan mudah. Kami akan mengembalikan uang anda dengan cepat.</p>
                                 </div>
                             </div>
                         </div>
@@ -118,217 +711,6 @@
             </div>
         </div>
     </section>
-    <section class="py-12 lg:py-24 overflow-hidden">
-        <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto mb-24 text-center">
-                <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl tracking-sm mb-16">Our commitment to green energy is paving the way for a cleaner, healthier planet. </h1><a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white hover:text-teal-900 border border-teal-900 hover:border-lime-500 bg-teal-900 hover:bg-lime-500 rounded-full transition duration-200" href="#">Get in touch</a>
-            </div>
-            <div class="flex justify-center">
-                <div class="flex-shrink-0 h-full max-w-xs sm:max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image2.png" alt="" /></div>
-                <div class="flex-shrink-0 h-full max-w-xs sm:max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image3.png" alt="" /></div>
-                <div class="flex-shrink-0 h-full max-w-xs sm:max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image4.png" alt="" /></div>
-                <div class="flex-shrink-0 h-full max-w-xs sm:max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image2.png" alt="" /></div>
-                <div class="hidden md:block sm:flex-shrink-0 h-full max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image3.png" alt="" /></div>
-                <div class="hidden md:block sm:flex-shrink-0 h-full max-w-md md:max-w-xl mr-4 sm:mr-8"><img class="block w-full" src="fauna-assets/about/about-image4.png" alt="" /></div>
-            </div>
-        </div>
-    </section>
-    <section class="py-12 lg:py-24">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-20">
-                <h1 class="font-heading text-6xl mb-6">FAQ</h1>
-                <p class="text-gray-700">Here you will find the answers to the frequently asked questions.</p>
-            </div>
-            <div class="max-w-4xl mx-auto">
-                <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-                    <div>
-                        <div class="pr-5">
-                            <h5 class="text-lg font-medium">What is green energy?</h5>
-                        </div>
-                        <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                            <p class="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
-                        </div>
-                    </div><span class="flex-shrink-0">
-                        <div :class="{'hidden': accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                        <div class="hidden" :class="{'hidden': !accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                    </span>
-                </button>
-                <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-                    <div>
-                        <div class="pr-5">
-                            <h5 class="text-lg font-medium">How does green energy benefit the environment?</h5>
-                        </div>
-                        <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                            <p class="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
-                        </div>
-                    </div><span class="flex-shrink-0">
-                        <div :class="{'hidden': accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                        <div class="hidden" :class="{'hidden': !accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                    </span>
-                </button>
-                <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-                    <div>
-                        <div class="pr-5">
-                            <h5 class="text-lg font-medium">What green energy solutions does your company offer?</h5>
-                        </div>
-                        <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                            <p class="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
-                        </div>
-                    </div><span class="flex-shrink-0">
-                        <div :class="{'hidden': accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                        <div class="hidden" :class="{'hidden': !accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                    </span>
-                </button>
-                <button class="flex w-full py-6 px-8 mb-4 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-                    <div>
-                        <div class="pr-5">
-                            <h5 class="text-lg font-medium">What support services do you offer after installing green energy solutions?</h5>
-                        </div>
-                        <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                            <p class="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
-                        </div>
-                    </div><span class="flex-shrink-0">
-                        <div :class="{'hidden': accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                        <div class="hidden" :class="{'hidden': !accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                    </span>
-                </button>
-                <button class="flex w-full py-6 px-8 mb-24 items-start justify-between text-left shadow-md rounded-2xl" x-data="{ accordion: false }" x-on:click.prevent="accordion = !accordion">
-                    <div>
-                        <div class="pr-5">
-                            <h5 class="text-lg font-medium">How do solar panels work?</h5>
-                        </div>
-                        <div class="overflow-hidden h-0 pr-5 duration-500" x-ref="container" :style="accordion ? 'height: ' + $refs.container.scrollHeight + 'px' : ''">
-                            <p class="text-gray-700 mt-4">We provide a range of green energy solutions, including solar power systems, wind turbines, energy-efficient appliances, and smart home technologies to enhance energy sustainability.</p>
-                        </div>
-                    </div><span class="flex-shrink-0">
-                        <div :class="{'hidden': accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 5.69995V18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                        <div class="hidden" :class="{'hidden': !accordion}">
-                            <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.69995 12H18.3" stroke="#1D1F1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </div>
-                    </span>
-                </button>
-                <div class="sm:flex py-10 px-5 sm:px-10 bg-orange-50 rounded-2xl">
-                    <div class="mb-4 sm:mb-0 sm:mr-6">
-                        <svg width="48" height="48" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 8C0 3.58172 3.58172 0 8 0H40C44.4183 0 48 3.58172 48 8V40C48 44.4183 44.4183 48 40 48H8C3.58172 48 0 44.4183 0 40V8Z" fill="#BEF264"></path>
-                            <path d="M13.676 15.5617C11.7951 17.8602 10.6666 20.7983 10.6666 24C10.6666 27.2017 11.7951 30.1398 13.6761 32.4383L18.9201 27.1943C18.3372 26.2694 18 25.174 18 24C18 22.8259 18.3372 21.7306 18.92 20.8057L13.676 15.5617Z" fill="#022C22"></path>
-                            <path d="M15.5616 13.6761L20.8056 18.9201C21.7306 18.3372 22.8259 18 24 18C25.174 18 26.2694 18.3372 27.1943 18.9201L32.4383 13.6761C30.1398 11.7951 27.2017 10.6666 24 10.6666C20.7982 10.6666 17.8601 11.7951 15.5616 13.6761Z" fill="#022C22"></path>
-                            <path d="M34.3239 15.5617L29.0799 20.8057C29.6628 21.7307 30 22.8259 30 24C30 25.174 29.6627 26.2693 29.0799 27.1943L34.3238 32.4383C36.2048 30.1398 37.3333 27.2017 37.3333 24C37.3333 20.7983 36.2048 17.8602 34.3239 15.5617Z" fill="#022C22"></path>
-                            <path d="M32.4382 34.3239L27.1942 29.0799C26.2693 29.6628 25.174 30 24 30C22.8259 30 21.7307 29.6628 20.8057 29.0799L15.5617 34.3239C17.8602 36.2048 20.7983 37.3333 24 37.3333C27.2016 37.3333 30.1397 36.2048 32.4382 34.3239Z" fill="#022C22"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h5 class="text-xl font-medium mb-4">Still have questions?</h5>
-                        <p class="text-gray-700"><span>For assistance, please visit our</span> <a class="inline-block text-black font-medium underline" href="#">Contact Us</a> <span>page or call our customer support hotline at</span> <span class="text-black font-medium">(671) 555-0110</span> <span>. Our dedicated team is ready to help you on your journey to a greener, more sustainable future.</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-12 lg:py-24 overflow-hidden" x-data="{ activeSlide: 1, slideCount: 3 }">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap items-center -mx-4">
-                <div class="w-full md:w-1/2 px-4 mb-12 md:mb-0">
-                    <div class="max-w-lg mx-auto md:mx-0 overflow-hidden">
-                        <div class="flex -mx-4 transition-transform duration-500" :style="'transform: translateX(-' + (activeSlide - 1) * 100 + '%)'"><img class="block flex-shrink-0 w-full px-4" src="fauna-assets/testimonials/photo-lg.png" alt="" /><img class="block flex-shrink-0 w-full px-4" src="fauna-assets/testimonials/photo-lg.png" alt="" /><img class="block flex-shrink-0 w-full px-4" src="fauna-assets/testimonials/photo-lg.png" alt="" /></div>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 px-4">
-                    <div class="max-w-lg mx-auto md:mr-0 overflow-hidden">
-                        <div class="flex -mx-4 transition-transform duration-500" :style="'transform: translateX(-' + (activeSlide - 1) * 100 + '%)'">
-                            <div class="flex-shrink-0 px-4 w-full">
-                                <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Flow transformed my energy use. Efficient, green tech, outstanding service!”</h4><span class="block text-xl font-medium">Jenny Wilson</span> <span class="block mb-12 lg:mb-32 text-lg text-gray-700">Solar energy service</span>
-                            </div>
-                            <div class="flex-shrink-0 px-4 w-full">
-                                <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Efficient, green tech, outstanding service”</h4><span class="block text-xl font-medium">John Jones</span> <span class="block mb-12 lg:mb-32 text-lg text-gray-700">CE0 Solar Company</span>
-                            </div>
-                            <div class="flex-shrink-0 px-4 w-full">
-                                <h4 class="text-3xl lg:text-4xl font-medium mb-10">“Flow transformed my energy use, efficient, green tech, outstanding service.”</h4><span class="block text-xl font-medium">James Harrison</span> <span class="block mb-12 lg:mb-32 text-lg text-gray-700">Developer</span>
-                            </div>
-                        </div>
-                        <div>
-                            <button class="inline-block mr-4 text-gray-700 hover:text-lime-500" x-on:click="activeSlide = activeSlide &gt; 1 ? activeSlide - 1 : slideCount">
-                                <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M24.4 16H7.59998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M16 24.4L7.59998 16L16 7.59998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                            <button class="inline-block text-gray-700 hover:text-lime-500" x-on:click="activeSlide = activeSlide &lt; slideCount ? activeSlide + 1 : 1">
-                                <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.59998 16H24.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M16 7.59998L24.4 16L16 24.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div>
-        <div>
-            <section>
-                <div class="p-4">
-                    <div class="max-w-xl lg:max-w-5xl mx-auto xl:max-w-none px-5 md:px-12 xl:px-24 py-16 bg-teal-900 rounded-2xl">
-                        <div class="container mx-auto px-4">
-                            <div class="flex flex-wrap items-center -mx-4">
-                                <div class="w-full lg:w-2/3 px-4 mb-8 lg:mb-0">
-                                    <div class="max-w-md xl:max-w-none">
-                                        <h1 class="font-heading text-4xl xs:text-5xl sm:text-6xl tracking-sm text-white mb-6">Learn Frontend Web Development</h1>
-                                        <p class="text-lg text-white opacity-80">Visit www.pixelrocket.store and learn how to become a frontend web developer</p>
-                                    </div>
-                                </div>
-                                <div class="w-full lg:w-1/3 px-4 lg:text-right"><a class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-teal-900 border border-lime-500 hover:border-white bg-lime-500 hover:bg-white rounded-full transition duration-200" href="https://www.pixelrocket.store">Get Started</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
     <section class="relative py-12 lg:py-24 bg-orange-50 overflow-hidden"><img class="absolute bottom-0 left-0" src="fauna-assets/footer/waves-lines-left-bottom.png" alt="" />
         <div class="container px-4 mx-auto relative">
             <div class="flex flex-wrap mb-16 -mx-4">

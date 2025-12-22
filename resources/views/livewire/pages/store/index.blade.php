@@ -1,5 +1,5 @@
-<div class="container mx-auto px-6! md:px-12! lg:px-4">
-    <div class="mt-28 md:mt-30 lg:mt-34 py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl">
+<div class="container mx-auto px-6! md:px-12! lg:px-4 mt-24 md:mt-28 lg:mt-36 lg:pb-0">
+    <div class="py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl">
         <div class="store_header flex items-center justify-between">
             <div class="flex gap-3 md:gap-4 items-center ">
                 <div class="store_logo w-14 md:w-18 lg:w-26 h-auto aspect-square rounded-full bg-gray-200">
@@ -144,7 +144,7 @@
         @endif
     </x-bottom-drawer>
 
-    <div class="wrapper mt-8">
+    <div class="wrapper mt-6">
         <div class="tabs-wrapper hidden lg:flex border-b border-gray-300">
             <div class="px-6 py-2.5 relative">
                 <a href="" class="text-teal-700 font-semibold">Produk</a>
@@ -155,7 +155,7 @@
             </div>
         </div>
 
-        <div class="flex mt-8 gap-6">
+        <div class="flex mt-6 gap-6">
             <div class="sidenav-wrapper w-1/5 hidden lg:block">
                 <!-- Component Start -->
                 <div class="flex flex-col items-center w-full overflow-hidden text-gray-700 shadow-md bg-gray-50 rounded-xl">

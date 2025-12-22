@@ -3,5 +3,5 @@
 @elseif($size=='md')
 <button {{$attributes->merge(['class' => "inline-block w-full  " . ($variant == 'outlined' ? 'bg-transparent text-teal-900! hover:border-teal-700!' : 'bg-teal-900! text-white') . " border border-teal-900! px-5 py-2.5 font-bold text-center align-middle transition-all rounded-lg cursor-pointer active:opacity-85 hover:-translate-y-px hover:shadow-xs leading-normal text-sm ease-in tracking-tight-rem bg-150 bg-x-25"])}}>{{$slot}}</button>
 @else
-<button {{$attributes->merge(['class' => "inline-block w-full  " . ($variant == 'outlined' ? 'bg-transparent text-teal-900! hover:border-teal-700!' : 'bg-teal-900! text-white') . " border border-teal-900! px-4 py-1.5 font-semibold! text-center align-middle transition-all rounded-lg cursor-pointer active:opacity-85 hover:-translate-y-px hover:shadow-xs leading-normal text-sm ease-in tracking-tight-rem bg-150 bg-x-25"])}}>{{$slot}}</button>
+<button {{$attributes->merge(['class' => "inline-block w-full  " . ($variant == 'outlined' ? 'bg-transparent text-teal-900! hover:border-teal-700!' : 'bg-teal-900! text-white') . " border border-teal-900! px-2.5 py-1 font-medium! text-center align-middle transition-all rounded-lg cursor-pointer active:opacity-85 hover:-translate-y-px hover:shadow-xs leading-normal text-sm ease-in tracking-tight-rem bg-150 bg-x-25"])}}>{{$slot}}</button>
 @endif

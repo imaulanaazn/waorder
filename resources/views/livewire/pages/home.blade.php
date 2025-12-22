@@ -1,5 +1,5 @@
 <div>
-    <section class="mt-22 md:mt-26 lg:mt-38 lg:pb-0">
+    <section class="mt-24 md:mt-28 lg:mt-38 lg:pb-0">
         <div class="container mx-auto px-4">
             <div x-data="{            
                     slides: [                
@@ -68,7 +68,7 @@
             </div>
         </div>
     </section>
-    <section class="pt-4 lg:pt-10">
+    <section class="mt-6 lg:mt-10">
         <div class="container mx-auto px-4">
             <div class="wrapper rounded-xl border border-gray-200 p-6">
                 <h2 class="text-xl font-bold text-gray-800">Kategori Pilihan</h2>
@@ -83,10 +83,10 @@
             </div>
         </div>
     </section>
-    <section class="pt-4 lg:pt-10">
+    <section class="mt-6 lg:mt-10">
         <div class="container mx-auto px-4">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Produk Terlaris</h2>
-            <div class="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
+            <div class="grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
                 <div class="w-full max-w-md bg-white overflow-hidden transition-all">
                     <!-- Product Image Section -->
                     <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
@@ -340,7 +340,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-10 max-w-34 mx-auto text-center">
+            <div class="mt-6 md:mt-10 max-w-34 mx-auto text-center">
                 <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
             </div>
         </div>
@@ -600,7 +600,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-10 max-w-34 mx-auto text-center">
+            <div class="mt-6 md:mt-10 max-w-34 mx-auto text-center">
                 <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
             </div>
         </div>

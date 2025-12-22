@@ -1,5 +1,5 @@
-<div class="container mx-auto px-6! md:px-12! lg:px-4">
-    <div class="mt-28 md:mt-30 lg:mt-34 py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl">
+<div class="container mx-auto px-6! md:px-12! lg:px-4 mt-24 md:mt-28 lg:mt-36 lg:pb-0">
+    <div class="py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl">
         <div class="store_header flex items-center justify-between">
             <div class="flex gap-3 md:gap-4 items-center ">
                 <div class="store_logo w-14 md:w-18 lg:w-26 h-auto aspect-square rounded-full bg-gray-200">
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="mt-4 md:mt-6 lg:mt-6 bg-white rounded-lg py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <div class="mt-4 md:mt-6 lg:mt-6 bg-white rounded-lg py-4 md:py-6 px-4 md:px-8 border border-gray-300 rounded-xl grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
         <div class="lg:col-span-1 col-span-1">
             <div class="flex gap-1 items-center">
                 <i class="fa-solid fa-star text-xl text-yellow-400"></i>
@@ -55,7 +55,7 @@
             <p class="text-lg">99.9% pembeli merasa puas</p>
             <p class="text-sm text-gray-500">123 rating . 120 ulasan</p>
         </div>
-        <div class="lg:col-span-4 hidden lg:flex lg:flex-row flex-col space-y-4 space-x-10">
+        <div class="lg:col-span-4 hidden lg:flex lg:flex-row flex-col gap-12">
             <div class="w-full max-w-64">
                 <div class="flex items-center max-w-64">
                     <div class="flex items-center gap-1">
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <div class="wrapper mt-8">
+    <div class="wrapper mt-6">
         <div class="tabs-wrapper hidden lg:flex border-b border-gray-300">
             <div class="px-6 py-2.5 relative">
                 <a href="" class="text-teal-700 font-semibold">Produk</a>
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div class="flex mt-8 gap-12">
+        <div class="flex gap-12">
             <div class="sidenav-wrapper w-1/5 hidden lg:block">
                 <!-- Component Start -->
                 <div class="flex flex-col items-center w-full overflow-hidden text-gray-700 shadow-md bg-gray-50 rounded-xl">
@@ -251,7 +251,7 @@
                 <div class="">
                     <!-- Review items will be loaded here -->
                     @foreach(['review1', 'review2'] as $review )
-                    <div class="flex flex-col md:flex-row gap-2 md:gap-10 py-6 border-b border-gray-100">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-10 py-6 border-b border-gray-150">
                         <div class="flex-1">
                             <div class="bg-gray-200 rounded-md w-14 h-auto aspect-square"><img src="" alt=""></div>
                             <p class="text-base font-bold text-gray-800 mt-2">Lorem ipsum dolor sit amet elit. </p>

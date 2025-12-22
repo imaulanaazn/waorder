@@ -7,6 +7,8 @@ use Livewire\Volt\Volt;
 
 Volt::route('/', 'pages.home')->name('home');
 
+require __DIR__ . '/auth.php';
+
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])
 //     ->name('dashboard');
@@ -20,8 +22,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Volt::route('/create-store', 'pages.store.create-store')->name('create-store');
-    Volt::route('/store', 'pages.store.index')->name('store-index');
-    Volt::route('/store/reviews', 'pages.store.reviews')->name('store-reviews');
+    Volt::route('/{store}', 'pages.store.index')->name('store-index');
+    Volt::route('/{store}/reviews', 'pages.store.reviews')->name('store-reviews');
+    Volt::route('/{store}/{slug}', 'pages.product.product')->name('product');
 });
 
 Route::view('profile', 'profile')
@@ -39,7 +42,3 @@ Route::get('/logout', function () {
 Route::get('/user/settings', function () {
     return view('user.settings');
 })->name('user.settings');
-
-
-
-require __DIR__ . '/auth.php';

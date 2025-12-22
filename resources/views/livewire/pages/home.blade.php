@@ -1,5 +1,5 @@
 <div>
-    <section class="mt-24 md:mt-28 lg:mt-38 lg:pb-0">
+    <section class="mt-24 md:mt-28 lg:mt-36 lg:pb-0">
         <div class="container mx-auto px-4">
             <div x-data="{            
                     slides: [                

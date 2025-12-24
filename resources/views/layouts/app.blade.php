@@ -23,7 +23,6 @@
 </head>
 
 <body class="antialiased bg-body text-body font-body">
-    <livewire:components.app-navbar />
     {{ $slot }}
 
     @livewireScripts

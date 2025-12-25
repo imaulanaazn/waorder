@@ -34,14 +34,14 @@
                                      class="dropdown-content pt-2 absolute top-5 left-1/2 -translate-x-1/2 z-50 w-max rounded-xl
                                             opacity-0 translate-y-2 scale-95 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100
                                             group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto">
-                                     <div class="bg-white/20 rounded-lg p-4 mt-4">
-                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-white/20">
-                                             <i class="fa-solid fa-box text-white"></i>
-                                             <span class="text-white text-sm">Item 1</span>
+                                     <div class="bg-white rounded-lg p-4 mt-4">
+                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-gray-100">
+                                             <i class="fa-solid fa-box text-gray-700"></i>
+                                             <span class="text-gray-700 text-sm">Item 1</span>
                                          </div>
-                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-white/20">
-                                             <i class="fa-solid fa-box text-white"></i>
-                                             <span class="text-white text-sm">item 2</span>
+                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-gray-100">
+                                             <i class="fa-solid fa-box text-gray-700"></i>
+                                             <span class="text-gray-700 text-sm">item 2</span>
                                          </div>
                                      </div>
                                  </div>
@@ -51,17 +51,17 @@
                                  <i class="fa-regular fa-envelope text-xl text-white group-hover:text-white/60" aria-hidden="true"></i>
 
                                  <div
-                                     class="dropdown-content pt-2 absolute top-5 left-1/2 -translate-x-1/2 z-50 w-max rounded-xl
+                                     class="dropdown-content pt-2 absolute top-5 left-1/2! -translate-x-1/2! z-50 w-max rounded-xl
                                             opacity-0 translate-y-2 scale-95 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100
                                             group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto">
-                                     <div class="bg-white/20 rounded-lg p-4 mt-4">
-                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-white/20">
-                                             <i class="fa-regular fa-message text-white"></i>
-                                             <span class="text-white text-sm">Chat</span>
+                                     <div class="bg-white rounded-lg p-4 mt-4">
+                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-gray-100">
+                                             <i class="fa-regular fa-message text-gray-700"></i>
+                                             <span class="text-gray-700 text-sm">Chat</span>
                                          </div>
-                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-white/20">
-                                             <i class="fa-regular fa-star text-white"></i>
-                                             <span class="text-white text-sm">Ulasan</span>
+                                         <div class="flex items-center gap-2 py-2 px-2 rounded-md hover:bg-gray-100">
+                                             <i class="fa-regular fa-star text-gray-700"></i>
+                                             <span class="text-gray-700 text-sm">Ulasan</span>
                                          </div>
                                      </div>
                                  </div>
@@ -122,7 +122,7 @@
          <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
              <div class="flex items-center justify-between"><a class="inline-block" href="#">
                      <!-- <img class="h-8" src="fauna-assets/logos/sign-logo-flow.svg" alt="" /> -->
-                     <p class="mb-0">WAOrder</p>
+                     <p class="mb-0">TOKOPAEDI</p>
                  </a>
                  <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="#">Login</a>
                      <button x-on:click="mobileNavOpen = !mobileNavOpen">

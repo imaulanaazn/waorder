@@ -30,7 +30,7 @@
                     <div class="relative flex items-center justify-between">
                         <a class="inline-block" href="#">
                             <!-- <img class="h-8" src="images/logo-white.svg" alt="" /> -->
-                            <p class="text-white mb-0">WAOrder</p>
+                            <p class="text-white mb-0">TOKOPAEDI</p>
                         </a>
                         <div class="flex items-center justify-end">
                             <div class="hidden md:block!">
@@ -61,7 +61,7 @@
                 <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
                     <div class="flex items-center justify-between"><a class="inline-block" href="#">
                             <!-- <img class="h-8" src="fauna-assets/logos/sign-logo-flow.svg" alt="" /> -->
-                            <p class="mb-0">WAOrder</p>
+                            <p class="mb-0">TOKOPAEDI</p>
                         </a>
                         <div class="flex items-center"><a class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200" href="#">Login</a>
                             <button x-on:click="mobileNavOpen = !mobileNavOpen">

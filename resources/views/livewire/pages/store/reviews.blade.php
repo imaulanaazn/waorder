@@ -67,7 +67,7 @@
                             <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">5</span>
                         </div>
                         <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                            <div class="h-1.5 bg-teal-700 rounded" style="width: 25%"></div>
+                            <div class="h-1.5 bg-lime-600 rounded" style="width: 25%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500">(0)</span>
                     </div>
@@ -77,7 +77,7 @@
                             <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">4</span>
                         </div>
                         <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                            <div class="h-1.5 bg-teal-700 rounded" style="width: 25%"></div>
+                            <div class="h-1.5 bg-lime-600 rounded" style="width: 25%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500">(0)</span>
                     </div>
@@ -87,7 +87,7 @@
                             <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">3</span>
                         </div>
                         <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                            <div class="h-1.5 bg-teal-700 rounded" style="width: 10%"></div>
+                            <div class="h-1.5 bg-lime-600 rounded" style="width: 10%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500">(0)</span>
                     </div>
@@ -99,7 +99,7 @@
                             <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">2</span>
                         </div>
                         <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                            <div class="h-1.5 bg-teal-700 rounded" style="width: 5%"></div>
+                            <div class="h-1.5 bg-lime-600 rounded" style="width: 5%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500">(0)</span>
                     </div>
@@ -109,7 +109,7 @@
                             <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">1</span>
                         </div>
                         <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                            <div class="h-1.5 bg-teal-700 rounded" style="width: 10%"></div>
+                            <div class="h-1.5 bg-lime-600 rounded" style="width: 10%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500">(0)</span>
                     </div>
@@ -120,8 +120,8 @@
         <div class="wrapper mt-6">
             <div class="tabs-wrapper hidden lg:flex border-b border-gray-300">
                 <div class="px-6 py-2.5 relative">
-                    <a href="" class="text-teal-700 font-semibold">Produk</a>
-                    <div class="h-0.5 w-full bg-teal-700 absolute bottom-0 left-0"></div>
+                    <a href="" class="text-lime-600 font-semibold">Produk</a>
+                    <div class="h-0.5 w-full bg-lime-600 absolute bottom-0 left-0"></div>
                 </div>
                 <div class="px-6 py-2.5 relative">
                     <a href="" class="text-gray-500 font-semibold">Ulasan</a>

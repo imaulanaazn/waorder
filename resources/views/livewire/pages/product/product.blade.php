@@ -54,7 +54,7 @@
                     </div>
                     <div class="mb-2 flex items-center justify-between">
                         <div class="flex flex-col md:flex-row">
-                            <span class="text-xl md:text-3xl font-semibold mr-2 text-teal-600">Rp 349.99</span>
+                            <span class="text-xl md:text-3xl font-semibold mr-2 text-lime-600">Rp 349.99</span>
                             <span class="text-sm md:text-base text-gray-500 line-through">$399.99</span>
                         </div>
                         <span class="block md:hidden">
@@ -71,10 +71,10 @@
                     <div class="mb-4 hidden md:block">
                         <h3 class="text-base mb-2 text-gray-700 font-medium">Jenis:</h3>
                         <div class="flex gap-2">
-                            <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-teal-500 cursor-pointer bg-teal-50">
+                            <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-lime-500 cursor-pointer bg-lime-50">
                                 <button
                                     class="w-6 h-6 bg-black rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"></button>
-                                <span class="text-teal-600">Jenis 1</span>
+                                <span class="text-lime-600">Jenis 1</span>
                             </div>
                             <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-gray-400 cursor-pointer">
                                 <button
@@ -92,10 +92,10 @@
                     <div class="mb-4 hidden md:block">
                         <h3 class="text-base mb-2 text-gray-700 font-medium">Warna:</h3>
                         <div class="flex gap-2">
-                            <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-teal-500 cursor-pointer bg-teal-50">
+                            <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-lime-600 cursor-pointer bg-lime-50">
                                 <button
                                     class="w-6 h-6 bg-black rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"></button>
-                                <span class="text-teal-600">Hitam</span>
+                                <span class="text-lime-600">Hitam</span>
                             </div>
                             <div class="flex gap-1.5 items-center p-1.5 rounded-lg border border-gray-400 cursor-pointer">
                                 <button
@@ -113,8 +113,8 @@
                     <div class="mb-4 hidden md:block">
                         <h3 class="text-base mb-2 text-gray-700 font-medium">ukuran:</h3>
                         <div class="flex gap-2">
-                            <div class="flex gap-1.5 items-center justify-center p-1.5 min-w-12 rounded-lg border border-teal-500 cursor-pointer bg-teal-50">
-                                <span class="text-teal-600">XL</span>
+                            <div class="flex gap-1.5 items-center justify-center p-1.5 min-w-12 rounded-lg border border-lime-600 cursor-pointer bg-lime-50">
+                                <span class="text-lime-600">XL</span>
                             </div>
                             <div class="flex gap-1.5 items-center justify-center p-1.5 min-w-12 rounded-lg border border-gray-400 cursor-pointer">
                                 <span class="text-gray-600">L</span>
@@ -180,21 +180,21 @@
                         <div class="hidden md:block">
                             <div class="flex gap-6 items-center justify-between">
                                 <span class="text-gray-500">Penilaian</span>
-                                <span class="text-teal-600 font-medium">123B</span>
+                                <span class="text-lime-600 font-medium">123B</span>
                             </div>
                             <div class="flex gap-6 items-center justify-between mt-4">
                                 <span class="text-gray-500">Produk</span>
-                                <span class="text-teal-600 font-medium">123</span>
+                                <span class="text-lime-600 font-medium">123</span>
                             </div>
                         </div>
                         <div class="hidden lg:block">
                             <div class="flex gap-6 items-center justify-between">
                                 <span class="text-gray-500">Bergabung</span>
-                                <span class="text-teal-600 font-medium">12j yang lalu</span>
+                                <span class="text-lime-600 font-medium">12j yang lalu</span>
                             </div>
                             <div class="flex gap-6 items-center justify-between mt-4">
                                 <span class="text-gray-500">Pengikut</span>
-                                <span class="text-teal-600 font-medium">123RB</span>
+                                <span class="text-lime-600 font-medium">123RB</span>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                                     <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">5</span>
                                 </div>
                                 <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                                    <div class="h-1.5 bg-teal-700 rounded" style="width: 25%"></div>
+                                    <div class="h-1.5 bg-lime-600 rounded" style="width: 25%"></div>
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">(0)</span>
                             </div>
@@ -239,7 +239,7 @@
                                     <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">4</span>
                                 </div>
                                 <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                                    <div class="h-1.5 bg-teal-700 rounded" style="width: 25%"></div>
+                                    <div class="h-1.5 bg-lime-600 rounded" style="width: 25%"></div>
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">(0)</span>
                             </div>
@@ -249,7 +249,7 @@
                                     <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">3</span>
                                 </div>
                                 <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                                    <div class="h-1.5 bg-teal-700 rounded" style="width: 10%"></div>
+                                    <div class="h-1.5 bg-lime-600 rounded" style="width: 10%"></div>
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">(0)</span>
                             </div>
@@ -261,7 +261,7 @@
                                     <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">2</span>
                                 </div>
                                 <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                                    <div class="h-1.5 bg-teal-700 rounded" style="width: 5%"></div>
+                                    <div class="h-1.5 bg-lime-600 rounded" style="width: 5%"></div>
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">(0)</span>
                             </div>
@@ -271,7 +271,7 @@
                                     <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">1</span>
                                 </div>
                                 <div class="w-3/4 h-1.5 mx-2 bg-gray-200 rounded">
-                                    <div class="h-1.5 bg-teal-700 rounded" style="width: 10%"></div>
+                                    <div class="h-1.5 bg-lime-600 rounded" style="width: 10%"></div>
                                 </div>
                                 <span class="text-sm font-medium text-gray-500">(0)</span>
                             </div>

@@ -67,7 +67,7 @@
                                 </button>
                             </div>
                             <h6
-                                class="text-teal-600 font-bold text-lg leading-9 w-full max-w-[176px] text-center">
+                                class="text-lime-600 font-bold text-lg leading-9 w-full max-w-[176px] text-center">
                                 $120.00</h6>
                             <h6 class="font-normal text-lg leading-9 text-gray-900 w-full max-w-[176px] text-center">
                                 $15.00 </h6>
@@ -122,7 +122,7 @@
                                 </button>
                             </div>
                             <h6
-                                class="text-teal-600 font-bold text-lg leading-9 w-full max-w-[176px] text-center">
+                                class="text-lime-600 font-bold text-lg leading-9 w-full max-w-[176px] text-center">
                                 $120.00</h6>
                             <h6 class="font-normal text-lg leading-9 text-gray-900 w-full max-w-[176px] text-center">
                                 $15.00 </h6>
@@ -144,7 +144,7 @@
                 </div> -->
                 </div>
                 <div
-                    class="hidden lg:block col-span-12 xl:col-span-3 bg-border  shadow-md w-full max-xl:px-6 max-xl:py-4 max-w-3xl xl:max-w-lg mx-auto lg:px-8 lg:py-6 rounded-lg">
+                    class="hidden lg:block col-span-12 xl:col-span-3 bg-border shadow-md w-full h-max max-xl:px-6 max-xl:py-4 max-w-3xl xl:max-w-lg mx-auto lg:px-8 lg:py-6 rounded-lg">
                     <h2 class="font-bold text-2xl leading-10 text-black pb-6 border-b border-gray-300">
                         Ringkasan Belanja</h2>
                     <div class="mt-8">
@@ -154,11 +154,10 @@
                         </div>
                         <div class="flex items-center justify-between pb-6">
                             <p class="font-normal text-base leading-8 text-black">Total</p>
-                            <p class="font-semibold text-lg leading-8 text-teal-700">$480.00</p>
+                            <p class="font-semibold text-lg leading-8 text-lime-600">$480.00</p>
                         </div>
                         <form>
-                            <button
-                                class="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">Checkout</button>
+                            <x-button-primary variant="filled" size="md">Checkout</x-button-primary>
                         </form>
                     </div>
                 </div>
@@ -167,12 +166,12 @@
     </div>
 
     <div class="mobile_nav lg:hidden fixed bottom-0 left-0 w-full z-50 bg-white shadow-[0_2px_6px_0_rgba(0,0,0,0.2)]">
-        <div class="w-full flex justify-between py-3 px-6! md:px-0 max-w-xl mx-auto">
+        <div class="w-full flex justify-between items-center py-3 px-6! md:px-0 max-w-xl mx-auto">
             <div class="">
-                <span class="text-lg font-bold">Rp 123.000</span>
-                <div><span class="text-sm">Total Diskon : </span><span class="text-sm text-rose-500">Rp 1.234</span> </div>
+                <span class="text-xl font-bold">Rp 123.000</span>
+                <div class="mt-0.5"><span class="text-sm text-gray-600">Total Diskon : </span><span class="text-sm text-rose-500">Rp 1.234</span> </div>
             </div>
-            <div class="w-max">
+            <div class="min-w-28">
                 <x-button-primary variant="filled" size="md">Beli (1)</x-button-primary>
             </div>
         </div>

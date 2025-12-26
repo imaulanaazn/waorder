@@ -21,6 +21,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'owner', 'middleware' => 'role:owner'], function () {
+        Volt::route('/dashboard', 'pages.owner.dashboard')->name('owner_dashboard');
+    });
+});
+
+Route::group(['middleware' => 'auth'], function () {
     Volt::route('/cart', 'pages.cart.cart')->name('cart');
     Volt::route('/create-store', 'pages.store.create-store')->name('create-store');
     Volt::route('/{store}', 'pages.store.index')->name('store-index');

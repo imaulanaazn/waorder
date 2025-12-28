@@ -72,4 +72,20 @@ class Product extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function getTotalStockAttribute()
+    {
+        // Jika produk tidak punya varian, ambil kolom stock asli
+        if ($this->variants->isEmpty()) {
+            return $this->stock;
+        }
+
+        // Jika punya varian, jumlahkan semua stok varian tersebut
+        return $this->variants->sum('stock');
+    }
 }

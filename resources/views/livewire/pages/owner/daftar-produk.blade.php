@@ -9,11 +9,11 @@
                             <button wire:click="openDrawer('filter')" class="lg:hidden">
                                 <i class="fa-solid fa-filter"></i>
                             </button>
-                            <button wire:click="openDrawer('filter')" class="lg:hidden">
+                            <button wire:click="openModal()" class="lg:hidden">
                                 <i class="fa-solid fa-plus font-medium"></i>
                             </button>
                             <div class="w-max hidden lg:block!">
-                                <button class="py-1.5! px-4 rounded-lg bg-indigo-400! text-white! font-medium xl:font-semibold!">
+                                <button wire:click="openModal()" class="py-1.5! px-4 rounded-lg bg-indigo-400! text-white! font-medium xl:font-semibold!">
                                     Tambah
                                 </button>
                             </div>
@@ -385,4 +385,142 @@
         </div>
         @endif
     </x-bottom-drawer>
+
+    <x-modal :showModal="$showModal" title="Tambah Produk">
+
+        <form role="form text-left" wire:submit.prevent="save">
+            @if($formStep == 1)
+
+            @if($formData['images'])
+            <div class="w-full mb-4 border border-dashed! border-gray-400! flex gap-3 justify-center p-4 rounded-lg">
+                @if(is_array($formData['images']))
+                @foreach($formData['images'] as $img)
+                <img src="{{ $img->temporaryUrl() }}" alt="Preview" class="w-24 h-auto aspect-square object-cover rounded-lg">
+                @endforeach
+                @else
+                <img src="{{ $formData['images']->temporaryUrl() }}" alt="Preview" class="w-48 h-auto aspect-square object-cover rounded-lg">
+                @endif
+            </div>
+            @endif
+
+            <div class="mb-4 w-full">
+                <label for="text-sm">Image</label>
+                <input type="file" wire:model="formData.images" name="image" multiple class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Image" aria-describedby="password-addon">
+            </div>
+            <div class="flex flex-col md:flex-row! md:gap-4">
+                <div class="w-full">
+                    <div class="mb-4">
+                        <label for="text-sm">Nama</label>
+                        <input type="text" wire:model="formData.name" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Name" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Kondisi</label>
+                        <select wire:model="formData.condition" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Category" aria-describedby="email-addon">
+                            <option value="new">Baru</option>
+                            <option value="second">Bekas</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Harga</label>
+                        <input type="number" wire:model="formData.price" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Price" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Stock</label>
+                        <input type="number" wire:model="formData.stock" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Stock" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Berat</label>
+                        <input type="number" wire:model="formData.weight" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Stock" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Lebar</label>
+                        <input type="number" wire:model="formData.width" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Stock" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4 hidden md:flex! gap-4">
+                        <div class="block min-h-6 pl-7">
+                            <label>
+                                <input id="checkbox-1" wire:model="formData.is_active" class="w-5 h-5 ease text-base -ml-7 rounded-1.4  checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Aktif</label>
+                            </label>
+                        </div>
+                        <div class="block min-h-6 pl-7">
+                            <label>
+                                <input id="checkbox-2" wire:model="formData.is_featured" class="w-5 h-5 ease text-base -ml-7 rounded-1.4  checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Featured</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <div class="mb-4">
+                        <label for="text-sm">Slug</label>
+                        <input type="text" wire:model="formData.slug" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Slug" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Min Order</label>
+                        <input type="number" wire:model="formData.min_order" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Price" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Harga Asli</label>
+                        <input type="number" wire:model="formData.original_price" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Price" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Kategori</label>
+                        <select wire:model="formData.category_id" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Category" aria-describedby="email-addon">
+                            <option value="">Pilih Kategori</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Tinggi</label>
+                        <input type="number" wire:model="formData.height" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Stock" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4">
+                        <label for="text-sm">Panjang</label>
+                        <input type="number" wire:model="formData.length" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Stock" aria-describedby="email-addon">
+                    </div>
+                    <div class="mb-4 flex gap-4 md:hidden!">
+                        <div class="block min-h-6 pl-7">
+                            <label>
+                                <input id="checkbox-1" wire:model="formData.is_active" class="w-5 h-5 ease text-base -ml-7 rounded-1.4  checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Aktif</label>
+                            </label>
+                        </div>
+                        <div class="block min-h-6 pl-7">
+                            <label>
+                                <input id="checkbox-2" wire:model="formData.is_featured" class="w-5 h-5 ease text-base -ml-7 rounded-1.4  checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Featured</label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-3 justify-end">
+                <div class="text-center">
+                    <x-button type="button" variant="outlined" action="closeModal">Batal</x-button>
+                </div>
+                <div class="text-center">
+                    <x-button type="button" variant="solid" action="nextStep">Selanjutnya</x-button>
+                </div>
+            </div>
+
+            @elseif($formStep == 2)
+            <div class="mb-4 w-full">
+                <label for="text-sm">Deskripsi</label>
+                <textarea wire:model="formData.description" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" aria-label="Description" aria-describedby="email-addon"></textarea>
+            </div>
+            <div class="flex gap-3 justify-end">
+                <div class="text-center">
+                    <x-button type="button" variant="outlined" action="prevStep">Kembali</x-button>
+                </div>
+                <div class="text-center">
+                    <x-button type="submit" variant="solid" action="save" wire:loading.attr="disabled" wire:target="save">Simpan</x-button>
+                </div>
+            </div>
+            @endif
+        </form>
+    </x-modal>
 </div>

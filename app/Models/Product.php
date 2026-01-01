@@ -4,34 +4,62 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+
+use Livewire\WithFileUploads;
+
 
 class Product extends Model
 {
     use HasFactory;
+    use WithFileUploads;
 
     protected $fillable = [
         'store_id',
         'category_id',
         'name',
         'slug',
-        'price',
-        'stock',
         'description',
+        'condition',
+        'min_order',
+        'price',
+        'original_price',
+        'stock',
+        'weight',
+        'width',
+        'height',
+        'length',
         'image',
         'is_active',
+        'is_featured',
+        'meta_title',
+        'meta_description',
+        'views_count',
+        'sold_count',
+        'rating_avg',
+        'reviews_count',
     ];
 
     protected $casts = [
-        'price'     => 'decimal:2',
-        'is_active' => 'boolean',
+        'price'          => 'decimal:2',
+        'original_price' => 'decimal:2',
+        'is_active'      => 'boolean',
+        'is_featured'    => 'boolean',
+        'weight'         => 'integer',
+        'stock'          => 'integer',
+        'rating_avg'     => 'decimal:2',
     ];
 
-    // Auto generate slug dari name
+    // --- Booted Method untuk Slug ---
     protected static function booted()
     {
         static::creating(function ($product) {
-            $product->slug = Str::slug($product->name);
+            // Jika slug kosong, buat dari name
+            if (!$product->slug) {
+                $product->slug = Str::slug($product->name);
+            }
         });
 
         static::updating(function ($product) {
@@ -40,8 +68,12 @@ class Product extends Model
             }
         });
     }
+    // --- Relasi ---
 
-    // === Relasi ===
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class);
+    }
 
     // 1 Product belongs to 1 Category
     public function category()
@@ -87,5 +119,33 @@ class Product extends Model
 
         // Jika punya varian, jumlahkan semua stok varian tersebut
         return $this->variants->sum('stock');
+    }
+
+    /**
+     * Relasi ke Galeri Foto Produk.
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order', 'asc');
+    }
+
+    /**
+     * Helper untuk mengambil foto utama saja.
+     */
+    public function primaryImage()
+    {
+        return $this->hasOne(ProductImage::class)->where('is_primary', true);
+    }
+
+    public function getThumbnailUrlAttribute(): string
+    {
+        $primary = $this->primaryImage;
+
+        if ($primary) {
+            return $primary->image_url;
+        }
+
+        // Kembalikan gambar default jika tidak ada foto
+        return asset('images/placeholder-product.png');
     }
 }

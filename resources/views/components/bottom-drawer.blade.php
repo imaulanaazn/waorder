@@ -1,4 +1,4 @@
-@props(['open' => ''])
+@props(['open' => false])
 
 <div class="lg:hidden">
     @if($open)

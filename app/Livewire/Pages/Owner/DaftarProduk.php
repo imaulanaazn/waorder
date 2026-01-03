@@ -168,7 +168,7 @@ class DaftarProduk extends Component
             })
             ->orderBy($this->orderBy, $this->order)
             ->latest()
-            ->paginate(5);
+            ->paginate(8);
     }
 
     // For Filter When Changing Tab | For Both

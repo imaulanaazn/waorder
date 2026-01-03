@@ -20,6 +20,7 @@ class Product extends Model
         'store_id',
         'category_id',
         'name',
+        'sku',
         'slug',
         'description',
         'condition',

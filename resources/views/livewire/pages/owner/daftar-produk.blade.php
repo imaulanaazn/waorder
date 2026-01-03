@@ -286,7 +286,7 @@
                                         </div>
                                     </td>
                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                                        <p class="font-semibold leading-tight text-xs text-slate-400 mb-0">{{$product->id}}</p>
+                                        <p class="font-semibold leading-tight text-xs text-slate-400 mb-0">{{$product->sku}}</p>
                                     </td>
                                     <td class="p-2 leading-normal text-center align-middle bg-transparent border-b-0 text-sm whitespace-nowrap shadow-transparent">
                                         <p class="font-semibold leading-tight text-xs text-slate-400 mb-0">{{$product->original_price}}</p>

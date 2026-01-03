@@ -37,6 +37,7 @@ class ProductSeeder extends Seeder
                 'store_id' => $faker->randomElement($storeIds),
                 'category_id' => $faker->randomElement($categoryIds),
                 'name' => ucwords($name),
+                'sku' => 'SKU-' . strtoupper($faker->bothify('???-####')),
                 'slug' => Str::slug($name) . '-' . $faker->unique()->numberBetween(100, 999),
                 'description' => $faker->paragraph(3),
                 'condition' => $faker->randomElement(['new', 'second']),

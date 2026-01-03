@@ -24,6 +24,7 @@ return new class extends Migration
 
             // --- Informasi Dasar ---
             $table->string('name');
+            $table->string('sku', 50)->unique()->index();
             $table->string('slug')->unique();
             $table->text('description');
             $table->enum('condition', ['new', 'second'])->default('new'); // Kondisi barang

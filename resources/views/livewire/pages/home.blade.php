@@ -5,15 +5,15 @@
             <div x-data="{            
                     slides: [                
                         {
-                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-1.webp',
+                            imgSrc: '/assets/img/tokopaedi_belanja_banner.png',
                             imgAlt: 'Vibrant abstract painting with swirling blue and light pink hues on a canvas.',                
                         },                
                         {                    
-                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-2.webp',                    
+                            imgSrc: '/assets/img/tokopaedi_mall_banner.png',                    
                             imgAlt: 'Vibrant abstract painting with swirling red, yellow, and pink hues on a canvas.',                
                         },                
                         {                    
-                            imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-3.webp',                    
+                            imgSrc: '/assets/img/tokopaedi_promo_banner.png',                    
                             imgAlt: 'Vibrant abstract painting with swirling blue and purple hues on a canvas.',                
                         },            
                     ],            
@@ -34,17 +34,17 @@
                             this.currentSlideIndex = 1                
                         }            
                     },        
-                }" class="relative w-full overflow-hidden rounded-xl">
+                }" class="relative w-full overflow-visible">
 
                 <!-- previous button -->
-                <button type="button" class="absolute left-5 top-1/2 z-20 flex rounded-full -translate-y-1/2! items-center justify-center bg-white/40 p-2 text-gray-600 transition hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="previous slide" x-on:click="previous()">
+                <button type="button" class="absolute left-0 top-1/2 z-20 flex rounded-full -translate-y-1/2! -translate-x-1/2! items-center justify-center bg-white p-2 text-gray-600 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="previous slide" x-on:click="previous()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pr-0.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
                 </button>
 
                 <!-- next button -->
-                <button type="button" class="absolute right-5 top-1/2 z-20 flex rounded-full -translate-y-1/2! items-center justify-center bg-white/40 p-2 text-gray-600 transition hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="next slide" x-on:click="next()">
+                <button type="button" class="absolute right-0 top-1/2 z-20 flex rounded-full -translate-y-1/2! translate-x-1/2! items-center justify-center bg-white p-2 text-gray-600 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:outline-offset-0 " aria-label="next slide" x-on:click="next()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="3" class="size-5 md:size-6 pl-0.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
@@ -52,7 +52,7 @@
 
                 <!-- slides -->
                 <!-- Change min-h-[50svh] to your preferred height size -->
-                <div class="relative min-h-[20svh] lg:min-h-[40svh] w-full">
+                <div class="relative min-h-[15svh] lg:min-h-[40svh] w-full rounded-xl overflow-hidden">
                     <template x-for="(slide, index) in slides">
                         <div x-show="currentSlideIndex == index + 1" class="absolute inset-0" x-transition.opacity.duration.1000ms>
                             <img class="absolute w-full h-full inset-0 object-cover text-on-surface dark:text-on-surface-dark" x-bind:src="slide.imgSrc" x-bind:alt="slide.imgAlt" />

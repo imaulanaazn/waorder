@@ -10,15 +10,19 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 
 #[Layout('layouts.owner-layout')]
 class DaftarProduk extends Component
 {
-
     use WithFileUploads;
+    use WithPagination;
 
-    public string $drawerOpen = ''; //sort, category, filter
+    public $categories;
+    public $drawerOpen = false; //sort, category, filter
     public $showModal = false;
+    public $formStep = 1;
     public $formData = [
         'category_id' => '',
         'name' => '',
@@ -40,10 +44,23 @@ class DaftarProduk extends Component
         'meta_description' => '',
     ];
 
-    public $categories;
-    public $products;
+    #[Url(except: '')]
+    public $search = '';
 
-    public $formStep = 1;
+    #[Url(except: '')]
+    public $category_id = '';
+
+    #[Url(except: 'name')]
+    public $orderBy = 'name';
+
+    #[Url(except: 'asc')]
+    public $order = 'asc';
+
+    #[Url(except: '')]
+    public $status = '';
+
+    #[Url(except: '')]
+    public $outstock = '';
 
     public function openDrawer($drawer)
     {
@@ -52,13 +69,11 @@ class DaftarProduk extends Component
 
     public function closeDrawer()
     {
-        $this->drawerOpen = '';
+        $this->drawerOpen = false;
     }
 
     public function openModal()
     {
-        $this->resetValidation();
-        $this->reset();
         $this->showModal = true;
     }
 
@@ -129,12 +144,107 @@ class DaftarProduk extends Component
             type: 'success'
         );
         $this->closeModal();
+        $this->formStep = 1;
+    }
+
+    public function getProductsQuery()
+    {
+        return Product::query()
+            ->when($this->search, function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+                // ->orWhere('sku', 'like', '%' . $this->search . '%')
+                // ->orWhere('code', 'like', '%' . $this->search . '%');
+            })
+            ->when(
+                $this->category_id,
+                fn($q) =>
+                $q->where('category_id', $this->category_id)
+            )
+            ->when($this->status !== '', function ($query) {
+                $query->where('is_active', (bool) $this->status);
+            })
+            ->when($this->outstock !== '', function ($query) {
+                $query->where('stock', '<', 1);
+            })
+            ->orderBy($this->orderBy, $this->order)
+            ->latest()
+            ->paginate(5);
+    }
+
+    // For Filter When Changing Tab | For Both
+    public function tabFilter($tab)
+    {
+        $this->closeDrawer();
+        if ($tab === 'all') {
+            $this->status = '';
+            $this->outstock = '';
+        } else if ($tab === 'active') {
+            $this->status = 1;
+            $this->outstock = '';
+        } else if ($tab === 'outstock') {
+            $this->status = '';
+            $this->outstock = 1;
+        } else if ($tab === 'nonaktif') {
+            $this->status = 0;
+            $this->outstock = '';
+        }
+        $this->resetPage();
+    }
+
+    // For Sorting | Desktop only
+    public function sortFilter($sort)
+    {
+        $this->orderBy = explode('-', $sort)[0];
+        $this->order = explode('-', $sort)[1];
+        $this->resetPage();
+    }
+
+    // For Category Filter | Desktop only
+    public function categoryFilter($category_id)
+    {
+        $this->category_id = $category_id;
+        $this->resetPage();
+    }
+
+    // For Apply Filter | Mobile only
+    public function applyFilter()
+    {
+        $this->closeDrawer();
+        $this->resetPage();
+    }
+
+    //For toggling product status from the table
+    public function toggleStatus($productId)
+    {
+        $product = Product::find($productId);
+        $product->is_active = !$product->is_active;
+        $product->save();
+
+        $this->dispatch(
+            'alert',
+            message: 'Status produk berhasil diubah!',
+            type: 'success'
+        );
+    }
+
+    // This runs whenever ANY property is updated
+    public function updated($propertyName)
+    {
+        // If the updated property is part of the filters, reset the page
+        if (in_array($propertyName, ['search', 'category_id', 'orderBy', 'order', 'status', 'outstock'])) {
+            $this->resetPage();
+        }
+    }
+
+    public function mount()
+    {
+        $this->categories = Category::orderBy('name')->get();
     }
 
     public function render()
     {
-        $this->categories = Category::all();
-        $this->products = Product::all();
-        return view('livewire.pages.owner.daftar-produk');
+        return view('livewire.pages.owner.daftar-produk', [
+            'products' => $this->getProductsQuery()
+        ]);
     }
 }

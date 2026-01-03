@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('image')->nullable();      // Foto utama
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false); // Untuk masuk ke "Produk Pilihan" di Home
+            $table->boolean('is_best_seller')->default(false);
 
             // --- SEO & Statistik (Denormalisasi untuk performa cepat) ---
             $table->string('meta_title')->nullable();
@@ -61,6 +62,7 @@ return new class extends Migration
             $table->index(['is_active', 'is_featured']);
             $table->index('price');
             $table->index('sold_count');
+            $table->index('is_best_seller');
         });
     }
 

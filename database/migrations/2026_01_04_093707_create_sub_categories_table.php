@@ -11,18 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
+
+            // Relasi ke kategori utama (Parent)
+            $table->foreignId('category_id')
+                ->constrained('categories')
+                ->onDelete('cascade');
+
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('image')->nullable();
-            $table->boolean('is_popular')->default(false);
+
             $table->timestamps();
+
+            // Index untuk pencarian cepat berdasarkan kategori
+            $table->index('category_id');
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('sub_categories');
     }
 };

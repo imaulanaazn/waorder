@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'slug', 'image', 'is_popular'];
 
     // Auto generate slug dari name
     protected static function booted()
@@ -30,5 +30,10 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function subCategories(): HasMany
+    {
+        return $this->hasMany(SubCategory::class)->orderBy('sort_order', 'asc');
     }
 }

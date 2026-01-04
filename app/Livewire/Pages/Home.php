@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Category;
+use App\Models\Product;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -18,6 +20,8 @@ class Home extends Component
 
     public function render()
     {
-        return view('livewire.pages.home');
+        $products = Product::all();
+        $popular_categories = Category::where('is_popular', true)->get();
+        return view('livewire.pages.home', compact('products', 'popular_categories'));
     }
 }

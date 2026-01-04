@@ -72,13 +72,23 @@
     <section class="mt-6 lg:mt-10">
         <div class="container mx-auto px-4">
             <div class="wrapper rounded-xl border border-gray-200 p-6">
-                <h2 class="text-xl font-bold text-gray-800">Kategori Pilihan</h2>
-                <div class="kategori flex items-center gap-3 mt-4 w-full overflow-scroll no-scrollbar">
-                    @foreach(['Makanan', 'Minuman', 'Tas', 'Sepeda', 'Kapal', 'Motor', 'Laptop', 'Handphone', 'Elektronik', 'Buku', 'Fashion'] as $category)
-                    <div class="bg-white rounded-full px-4 py-1.5 text-center border border-gray-300 flex items-center justify-center gap-1.5 hover:bg-gray-200 transition hover:cursor-pointer">
-                        <i class="fa-solid fa-archway text-sm text-gray-500"></i>
-                        <span class="text-base text-gray-600">{{ $category }}</span>
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-gray-800">Kategori Pilihan</h2>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('all_categories') }}" class="text-teal-600 hover:text-teal-800 transition">Lihat Semua</a>
+                        <i class="fa-solid fa-arrow-right text-teal-600 hover:text-teal-800 transition text-sm"></i>
                     </div>
+                </div>
+                <div class="kategori flex items-center gap-3 mt-4 w-full overflow-scroll no-scrollbar">
+                    @foreach($popular_categories as $category)
+                    <a href="{{ route('category', $category->slug) }}" wire:navigate>
+                        <div class="bg-white rounded-2xl px-4 py-1.5 text-center border border-gray-300 flex items-center justify-center gap-2.5 transition hover:cursor-pointer">
+                            <div class="w-5 h-5">
+                                <img src="/assets/{{ $category->image }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-base text-gray-600 whitespace-nowrap">{{ $category->name }}</span>
+                        </div>
+                    </a>
                     @endforeach
                 </div>
             </div>

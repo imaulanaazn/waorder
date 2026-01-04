@@ -13,6 +13,9 @@ require __DIR__ . '/auth.php';
 //     ->middleware(['auth', 'verified'])
 //     ->name('dashboard');
 
+Volt::route('/cat/{slug}', 'pages.category.index')->name('category');
+Volt::route('/all_categories', 'pages.category.index')->name('all_categories');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {
         Volt::route('/dashboard', 'pages.admin.dashboard')->name('admin_dashboard');

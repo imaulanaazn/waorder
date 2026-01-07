@@ -5,8 +5,10 @@
                  <a class="hidden md:inline-block" href="/">
                      <p class="text-white mb-0 text-xl font-bold text-lime-300!">TOKOPAEDI</p>
                  </a>
-                 <div class="relative w-3/4 md:w-3/5 lg:w-2/5 xl:w-3/5 transition-all">
+                 <div class="relative w-3/4 md:w-3/5 lg:w-2/5 xl:w-3/5 transition-all" x-data="{ showModal: false }" x-on:click.away="showModal = false">
                      <input
+                         x-on:focus="showModal = true"
+                         wire:model.live.debounce.500ms="search"
                          type="text"
                          placeholder="Cari di TOKOPAEDI"
                          id="searchInput"
@@ -17,11 +19,37 @@
                          </svg>
                      </div>
                      <div class="absolute left-0! -bottom-7! hidden lg:flex text-white/90 gap-3">
-                         <p class="text-sm font-light">Popok bayi</p>
-                         <p class="text-sm font-light">Aksesoris</p>
-                         <p class="text-sm font-light">Handphone</p>
-                         <p class="text-sm font-light">Guitar</p>
+                         <p class="text-sm font-light">This</p>
+                         <p class="text-sm font-light">Is Search</p>
+                         <p class="text-sm font-light">History</p>
+                         <p class="text-sm font-light">User</p>
                      </div>
+
+                     @if($productResult || $storeResult)
+                     <div x-show="showModal" class="absolute top-12 left-0 w-full bg-white px-4 py-3 rounded-lg shadow-md">
+                         @foreach($productResult as $product)
+                         <a href="{{ route('search', ['keyword' => $product->name]) }}">
+                             <div class="py-2 px-2 rounded-md hover:bg-slate-50 flex items-center gap-2">
+                                 <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                                 <span class="text-sm font-medium">
+                                     {{ $product->name }}
+                                 </span>
+                             </div>
+                         </a>
+                         @endforeach
+                         @foreach($storeResult as $store)
+                         <a href="{{ route('store', [$store->slug]) }}">
+                             <div class="py-2 px-2 rounded-md hover:bg-slate-50 flex items-center gap-2">
+                                 <div class="w-8 h-8 rounded-full bg-slate-100"></div>
+                                 <div class="text-sm">
+                                     <p class="font-medium">{{ $store->name }}</p>
+                                     <p class="text-xs">{{ $store->city }}</p>
+                                 </div>
+                             </div>
+                         </a>
+                         @endforeach
+                     </div>
+                     @endif
                  </div>
 
                  <div class="flex items-center justify-end">

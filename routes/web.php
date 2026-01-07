@@ -15,6 +15,7 @@ require __DIR__ . '/auth.php';
 
 Volt::route('/cat/{slug}', 'pages.category.index')->name('category');
 Volt::route('/all_categories', 'pages.category.index')->name('all_categories');
+Volt::route('/{store}/{slug}', 'pages.product.product')->name('product');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {
@@ -36,7 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
     Volt::route('/create-store', 'pages.store.create-store')->name('create-store');
     Volt::route('/{store}', 'pages.store.index')->name('store-index');
     Volt::route('/{store}/reviews', 'pages.store.reviews')->name('store-reviews');
-    Volt::route('/{store}/{slug}', 'pages.product.product')->name('product');
 });
 
 Route::view('profile', 'profile')

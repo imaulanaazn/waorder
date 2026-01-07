@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ProductVariantSeeder::class,
             CartSeeder::class,
             SubCategorySeeder::class,
+            PromotionSeeder::class,
             // OrderSeeder::class, 
             // OrderItemSeeder::class
         ]);

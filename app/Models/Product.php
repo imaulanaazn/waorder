@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
@@ -150,5 +151,27 @@ class Product extends Model
 
         // Kembalikan gambar default jika tidak ada foto
         return asset('images/placeholder-product.png');
+    }
+
+    /**
+     * Relasi ke Promosi (Many to Many).
+     */
+    public function promotions(): BelongsToMany
+    {
+        return $this->belongsToMany(Promotion::class, 'product_promotion')
+            ->withPivot('quota', 'used_quota')
+            ->withTimestamps();
+    }
+
+    /**
+     * Accessor untuk mendapatkan info promo yang sedang aktif saat ini.
+     */
+    public function getActivePromotionAttribute()
+    {
+        return $this->promotions()
+            ->where('is_active', true)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
     }
 }

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CartSeeder::class,
             SubCategorySeeder::class,
             PromotionSeeder::class,
+            KeywordSeeder::class,
             // OrderSeeder::class, 
             // OrderItemSeeder::class
         ]);

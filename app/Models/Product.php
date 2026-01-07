@@ -174,4 +174,22 @@ class Product extends Model
             ->where('end_date', '>=', now())
             ->first();
     }
+
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class, 'product_keyword');
+    }
+
+    // Scope untuk mencari produk berdasarkan keyword tertentu
+    public function scopeWithKeyword($query, $keywordName)
+    {
+        return $query->whereHas('keywords', function ($q) use ($keywordName) {
+            $q->where('name', $keywordName);
+        });
+    }
+
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
 }

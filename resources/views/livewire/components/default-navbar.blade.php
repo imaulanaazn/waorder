@@ -86,8 +86,8 @@
                                  class="dropdown-content pt-2 absolute top-5 left-1/2 -translate-x-1/2 z-50 w-max min-w-68 rounded-xl
                                             opacity-0 translate-y-2 scale-95 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100
                                             group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto">
-                                 <div class="bg-white/20 rounded-lg p-4 mt-4">
-                                     <p class="text-white/90 text-center text-sm">Anda belum memiliki toko</p>
+                                 <div class="bg-white rounded-lg p-4 mt-4">
+                                     <p class="text-gray-500 text-center text-sm">Anda belum memiliki toko</p>
                                      <a class="mt-4 inline-block text-center w-full py-2 px-4 bg-lime-500 text-green-900 font-medium text-sm rounded-lg hover:bg-lime-600 transition-colors">Buat Toko Gratis</a>
                                  </div>
                              </div>

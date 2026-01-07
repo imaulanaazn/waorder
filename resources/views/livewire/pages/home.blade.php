@@ -71,22 +71,22 @@
     </section>
     <section class="mt-6 lg:mt-10">
         <div class="container mx-auto px-4">
-            <div class="wrapper rounded-xl border border-gray-200 p-6">
+            <h2 class="text-2xl font-medium text-gray-900 mb-4 ">Kategori Pilihan</h2>
+            <div class="wrapper rounded-xl p-6 bg-lime-500">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-gray-800">Kategori Pilihan</h2>
-                    <div class="flex items-center gap-2">
-                        <a href="{{ route('all_categories') }}" class="text-teal-600 hover:text-teal-800 transition">Lihat Semua</a>
-                        <i class="fa-solid fa-arrow-right text-teal-600 hover:text-teal-800 transition text-sm"></i>
+                    <div class="flex items-center gap-2 font-medium text-gray-800 hover:text-white">
+                        <a href="{{ route('all_categories') }}" class=" transition">Lihat Semua</a>
+                        <i class="fa-solid fa-arrow-right transition text-sm"></i>
                     </div>
                 </div>
                 <div class="kategori flex items-center gap-3 mt-4 w-full overflow-scroll no-scrollbar">
                     @foreach($popular_categories as $category)
                     <a href="{{ route('category', $category->slug) }}" wire:navigate>
-                        <div class="bg-white rounded-2xl px-4 py-1.5 text-center border border-gray-300 flex items-center justify-center gap-2.5 transition hover:cursor-pointer">
+                        <div class="rounded-2xl px-4 py-1.5 text-center bg-white/50 flex items-center justify-center gap-2.5 transition hover:cursor-pointer">
                             <div class="w-5 h-5">
                                 <img src="/assets/{{ $category->image }}" alt="{{ $category->name }}" class="w-full h-full object-cover">
                             </div>
-                            <span class="text-base text-gray-600 whitespace-nowrap">{{ $category->name }}</span>
+                            <span class="text-base text-gray-800 whitespace-nowrap">{{ $category->name }}</span>
                         </div>
                     </a>
                     @endforeach
@@ -95,525 +95,131 @@
         </div>
     </section>
     <section class="mt-6 lg:mt-10">
-        <div class="container mx-auto px-4">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Produk Terlaris</h2>
-            <div class="grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+        <div class="container mx-auto px-4 mt-8">
+            <h2 class="text-2xl font-medium text-gray-800 mb-4">Produk Terlaris</h2>
+            <div class="grid gap-x-3 md:gap-x-4 gap-y-4 md:gap-y-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
+                @foreach($bestSellerProds as $product)
+                <a href="{{route('product', [$product->store->slug,$product->slug])}}" wire:navigate>
+                    <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                        <!-- Product Image Section -->
+                        @php
+                        $activePromo = $product->promotions->first();
+                        @endphp
+                        <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                            <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                            <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                                @if($activePromo && ($activePromo->type == 'percentage') )
+                                <span class="text-rose-500 font-semibold text-xs">
+                                    - {{(int) $activePromo->discount_value . '%'}}
+                                </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+                        <!-- Product Details Section -->
+                        <div class="pt-4">
+                            <!-- Title -->
+                            <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">{{$product->name}}</h2>
 
 
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
+                            <!-- Price and CTA -->
+                            <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                                <div class="price-container">
+                                    <div class="flex items-center">
+                                        <div class="text-base md:text-lg font-bold text-gray-800">
+                                            <span>{{currencyIDR($product->price)}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jakarta Pusat</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
+                            <!-- Rating -->
+                            <div class="flex items-center -translate-y-0.5">
+                                <div class="flex text-amber-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
                                 </div>
+                                <span class="text-gray-500 text-sm ml-1">{{$product->rating_avg}}</span>
+                                <span class="text-gray-500 text-sm ml-1">.</span>
+                                <span class="text-gray-500 text-sm ml-1">{{$product->sold_count}} terjual</span>
                             </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
+                            <div class="alamat -translate-y-0.5">
+                                <span class="text-gray-500 text-sm">Kota. {{$product->store->city}}</span>
                             </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
                         </div>
                     </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
+                </a>
+                @endforeach
             </div>
-            <div class="mt-6 md:mt-10 max-w-34 mx-auto text-center">
-                <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
+            @if($bestSellerProds->count() >= $bestSellerLimit)
+            <div class="mt-6 md:mt-10 w-max mx-auto text-center">
+                <x-button-primary variant="outlined" size="md" wire:click="loadMoreBestSeller">Muat Lebih Banyak</x-button-primary>
             </div>
+            @endif
         </div>
-        <div class="container mx-auto px-4">
-            <h2 class="text-xl font-bold text-gray-800 mb-4 mt-6">Rekomendasi Untukmu</h2>
+        <div class="container mx-auto px-4 mt-8">
+            <h2 class="text-2xl font-medium text-gray-900 mb-4 mt-6">Rekomendasi Untukmu</h2>
             <div class="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 dark:bg-gray-900">
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
+                @foreach($recommendedProds as $product)
+                <a href="{{route('product', [$product->store->slug,$product->slug])}}" wire:navigate>
+                    <div class="w-full max-w-md bg-white overflow-hidden transition-all">
+                        @php
+                        $activePromo = $product->promotions->first();
+                        @endphp
+                        <!-- Product Image Section -->
+                        <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
+                            <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
+                            <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
+                                @if($activePromo && ($activePromo->type == 'percentage') )
+                                <span class="text-rose-500 font-semibold text-xs">
+                                    - {{(int) $activePromo->discount_value . '%'}}
+                                </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
+                        <!-- Product Details Section -->
+                        <div class="pt-4">
+                            <!-- Title -->
+                            <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">{{$product->name}}</h2>
 
 
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
+                            <!-- Price and CTA -->
+                            <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
+                                <div class="price-container">
+                                    <div class="flex items-center">
+                                        <div class="text-base md:text-lg font-bold text-gray-800">
+                                            <span>{{currencyIDR($product->price)}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jakarta Pusat</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
+                            <!-- Rating -->
+                            <div class="flex items-center -translate-y-0.5">
+                                <div class="flex text-amber-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
                                 </div>
+                                <span class="text-gray-500 text-sm ml-1">{{$product->rating_avg}}</span>
+                                <span class="text-gray-500 text-sm ml-1">.</span>
+                                <span class="text-gray-500 text-sm ml-1">{{$product->sold_count}} terjual</span>
                             </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
+                            <div class="alamat -translate-y-0.5">
+                                <span class="text-gray-500 text-sm">Kota. {{$product->store->city}}</span>
                             </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
                         </div>
                     </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full max-w-md bg-white overflow-hidden transition-all">
-                    <!-- Product Image Section -->
-                    <div class="relative w-full h-auto aspect-square overflow-hidden bg-gray-100 rounded-lg">
-                        <img src="https://images.pexels.com/photos/610945/pexels-photo-610945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wireless Headphones" class="w-full h-full object-cover transition-transform duration-700 ease-in-out transform hover:scale-110">
-                        <div class="py-0.5 px-2 bg-white absolute top-0 right-0 rounded-bl-xl">
-                            <span class="text-rose-500 font-semibold text-xs">-10%</span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details Section -->
-                    <div class="pt-4">
-                        <!-- Title -->
-                        <h2 class="text-xs md:text-sm uppercase text-gray-900 leading-tight">SoundMax Pro X7 Wireless Noise-Cancelling</h2>
-
-
-                        <!-- Price and CTA -->
-                        <div class="flex flex-wrap lg:flex-nowrap my-1 items-center justify-between gap-4">
-                            <div class="price-container">
-                                <div class="flex items-center">
-                                    <div class="text-base md:text-lg font-extrabold text-gray-900">
-                                        Rp <span>279.99</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Rating -->
-                        <div class="flex items-center">
-                            <div class="flex text-amber-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                            <span class="text-gray-500 text-sm ml-1">5.0</span>
-                            <span class="text-gray-500 text-sm ml-1">.</span>
-                            <span class="text-gray-500 text-sm ml-1">135 terjual</span>
-                        </div>
-                        <div class="alamat">
-                            <span class="text-gray-500 text-sm">Kota Administrasi Jak..</span>
-                        </div>
-                    </div>
-                </div>
+                </a>
+                @endforeach
             </div>
-            <div class="mt-6 md:mt-10 max-w-34 mx-auto text-center">
-                <x-button-primary variant="outlined" size="sm">Lihat lainnya</x-button-primary>
+            @if($recommendedProds->count() >= $recommendedLimit)
+            <div class="mt-6 md:mt-10 w-max mx-auto text-center">
+                <x-button-primary variant="outlined" size="md" wire:click="loadMoreRecommended">Muat Lebih Banyak</x-button-primary>
             </div>
+            @endif
         </div>
     </section>
     <section class="py-12 lg:py-24">
@@ -648,10 +254,10 @@
                 <div class="flex mb-4 items-center">
                     <svg width="8" height="8" viewbox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="4" cy="4" r="4" fill="#022C22"></circle>
-                    </svg><span class="inline-block ml-2 text-sm font-medium">Solusi Belanja-mu</span>
+                    </svg><span class="inline-block ml-2 text-sm font-medium">Belanja gampang dan terpercaya</span>
                 </div>
                 <div class="border-t border-teal-900 border-opacity-25 pt-14">
-                    <h1 class="font-heading text-4xl sm:text-6xl mb-24">Belanja gampang dan terpercaya</h1>
+                    <!-- <h1 class="font-heading text-4xl sm:text-6xl mb-24">Belanja gampang dan terpercaya</h1> -->
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full sm:w-1/2 px-4 mb-16">
                             <div>
@@ -725,42 +331,72 @@
     <section class="relative py-12 lg:py-24 bg-orange-50 overflow-hidden"><img class="absolute bottom-0 left-0" src="fauna-assets/footer/waves-lines-left-bottom.png" alt="" />
         <div class="container px-4 mx-auto relative">
             <div class="flex flex-wrap mb-16 -mx-4">
-                <div class="w-full lg:w-2/12 xl:w-2/12 px-4 mb-16 lg:mb-0"><a class="inline-block mb-4" href="#"><img src="images/logo.svg" alt="" /></a></div>
+                <div class="w-full lg:w-2/12 xl:w-2/12 px-4 mb-16 lg:mb-0"><span class="text-2xl font-bold text-lime-500">TOKOPAEDI</span></div>
                 <div class="w-full md:w-7/12 lg:w-6/12 px-4 mb-16 lg:mb-0">
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
-                            <h3 class="mb-6 font-bold">Platform</h3>
+                            <h3 class="mb-6 font-bold">Layanan Pelanggan</h3>
                             <ul>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Solutions</a></li>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">How it works</a></li>
-                                <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Pricing</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Bantuan</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Metode Pembayaran</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Lacak Pesanan Pembeli</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Lacak Pengiriman Penjual</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Pengembalian Dana</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Hubungi Kami</a></li>
                             </ul>
                         </div>
                         <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
-                            <h3 class="mb-6 font-bold">Resources</h3>
+                            <h3 class="mb-6 font-bold">Jelajahi Tokopaedi</h3>
                             <ul>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Blog</a></li>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Help Center</a></li>
-                                <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Support</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Tentang Kami</a></li>
+                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Kebijakan</a></li>
+                                <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Kontak Media</a></li>
                             </ul>
                         </div>
-                        <div class="w-full xs:w-1/3 px-4">
-                            <h3 class="mb-6 font-bold">Company</h3>
-                            <ul>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">About</a></li>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Our Mission</a></li>
-                                <li class="mb-4"><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Careers</a></li>
-                                <li><a class="inline-block text-gray-600 hover:text-lime-500 font-medium" href="#">Contact</a></li>
-                            </ul>
+                        <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
+                            <h3 class="mb-6 font-bold">Pembayaran</h3>
+                            <div class="grid grid-cols-3 grid-rows-auto gap-2 w-max">
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/alfamart.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/alfamidi.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/bca.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/bni.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/bri.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/bsi.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/cimb.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/mandiri.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/seabank.png" alt="" class="min-w-14">
+                                </div>
+                                <div class="px-2 py-1 rounded-md shadow-sm bg-white">
+                                    <img src="/assets/img/payment-methods/shopeepay.png" alt="" class="min-w-14">
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="w-full md:w-5/12 lg:w-4/12 px-4">
                     <div class="max-w-sm p-8 bg-teal-900 rounded-2xl mx-auto md:mr-0">
-                        <h5 class="text-xl font-medium text-white mb-4">Your Source for Green Energy Updates</h5>
-                        <p class="text-sm text-white opacity-80 leading-normal mb-10">Stay in the loop with our Green Horizon newsletter, where we deliver bite-sized insights into the latest green energy solutions.</p>
+                        <h5 class="text-xl font-medium text-white mb-4">Jangan sampai ketinggalan event seru kami</h5>
+                        <p class="text-sm text-white opacity-80 leading-normal mb-10">Subscribe ke TOKOPAEDI agar mendapatkan berita terbaru terkain potongan harga, perubahan kebijakan dan event menarik lainnya</p>
                         <div class="flex flex-col">
-                            <input class="h-12 w-full px-4 py-1 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="email" placeholder="Your e-mail..." /><a class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium text-teal-900 border border-lime-500 hover:border-white bg-lime-500 hover:bg-white rounded-full transition duration-200" href="#">Get in touch</a>
+                            <input class="h-12 w-full px-4 py-1 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 focus:ring-lime-500 shadow rounded-full" type="email" placeholder="email kamu..." /><a class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium text-teal-900 border border-lime-500 hover:border-white bg-lime-500 hover:bg-white rounded-full transition duration-200" href="#">Langganan</a>
                         </div>
                     </div>
                 </div>
